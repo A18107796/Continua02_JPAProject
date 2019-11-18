@@ -13,17 +13,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "alumno")
-public class Alumno implements Serializable {
-
+@Table(name = "empleados")
+public class Empleado implements Serializable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_ALUMNO")
-	private Integer ID_ALUMNO;
-
-	@Column(name = "NOMBRE")
-	private String NOMBRE;
-
+	@Column(name = "ID_EMPLEADO")
+	private Integer ID_EMPLEADO;
+	
+	@Column(name = "NOMBRES")
+	private String NOMBRES;
+	
 	@Column(name = "APELLIDO_PA")
 	private String APELLIDO_PA;
 
@@ -39,7 +39,7 @@ public class Alumno implements Serializable {
 	@Column(name = "FECHA_NACIMIENTO")
 	private Date FECHA_NACIMIENTO;
 
-	@JoinColumn(name = "distrito", referencedColumnName = "ID_DISTRITO")
+	@JoinColumn(name = "distrito",referencedColumnName = "ID_DISTRITO")
 	@OneToOne(optional = false)
 	private Distrito distrito;
 
@@ -55,15 +55,20 @@ public class Alumno implements Serializable {
 	@Column(name = "FECHA_REG")
 	private Date FECHA_REG;
 
-	public Alumno() {
+	@JoinColumn(name = "area", referencedColumnName = "ID_AREA")
+	@OneToOne(optional = false)
+	private Area area;
+	
+	public Empleado() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Alumno(Integer iD_ALUMNO, String nOMBRE, String aPELLIDO_PA, String aPELLIDO_MA, String dNI, String sEXO,
-			Date fECHA_NACIMIENTO, Distrito distrito, String dIRECCION, String tELEFONO, String eSTADO,
-			Date fECHA_REG) {
-		ID_ALUMNO = iD_ALUMNO;
-		NOMBRE = nOMBRE;
+	
+	
+	public Empleado(Integer iD_EMPLEADO, String nOMBRES, String aPELLIDO_PA, String aPELLIDO_MA, String dNI,
+			String sEXO, Date fECHA_NACIMIENTO, Distrito distrito, String dIRECCION, String tELEFONO, String eSTADO,
+			Date fECHA_REG, Area area) {
+		ID_EMPLEADO = iD_EMPLEADO;
+		NOMBRES = nOMBRES;
 		APELLIDO_PA = aPELLIDO_PA;
 		APELLIDO_MA = aPELLIDO_MA;
 		DNI = dNI;
@@ -74,105 +79,139 @@ public class Alumno implements Serializable {
 		TELEFONO = tELEFONO;
 		ESTADO = eSTADO;
 		FECHA_REG = fECHA_REG;
+		this.area = area;
 	}
 
-	public String getSEXO() {
-		return SEXO;
+
+	public Integer getID_EMPLEADO() {
+		return ID_EMPLEADO;
 	}
 
-	public void setSEXO(String sEXO) {
-		SEXO = sEXO;
+
+	public void setID_EMPLEADO(Integer iD_EMPLEADO) {
+		ID_EMPLEADO = iD_EMPLEADO;
 	}
 
-	public Integer getID_ALUMNO() {
-		return ID_ALUMNO;
+
+	public String getNOMBRES() {
+		return NOMBRES;
 	}
 
-	public void setID_ALUMNO(Integer iD_ALUMNO) {
-		ID_ALUMNO = iD_ALUMNO;
+
+	public void setNOMBRES(String nOMBRES) {
+		NOMBRES = nOMBRES;
 	}
 
-	public String getNOMBRE() {
-		return NOMBRE;
-	}
-
-	public void setNOMBRE(String nOMBRE) {
-		NOMBRE = nOMBRE;
-	}
 
 	public String getAPELLIDO_PA() {
 		return APELLIDO_PA;
 	}
 
+
 	public void setAPELLIDO_PA(String aPELLIDO_PA) {
 		APELLIDO_PA = aPELLIDO_PA;
 	}
 
-	public String getDNI() {
-		return DNI;
-	}
-
-	public void setDNI(String dNI) {
-		DNI = dNI;
-	}
-
-	public Date getFECHA_NACIMIENTO() {
-		return FECHA_NACIMIENTO;
-	}
-
-	public void setFECHA_NACIMIENTO(Date fECHA_NACIMIENTO) {
-		FECHA_NACIMIENTO = fECHA_NACIMIENTO;
-	}
-
-	public Distrito getDistrito() {
-		return distrito;
-	}
-
-	public void setDistrito(Distrito distrito) {
-		this.distrito = distrito;
-	}
-
-	public String getDIRECCION() {
-		return DIRECCION;
-	}
-
-	public void setDIRECCION(String dIRECCION) {
-		DIRECCION = dIRECCION;
-	}
-
-	public String getTELEFONO() {
-		return TELEFONO;
-	}
-
-	public void setTELEFONO(String tELEFONO) {
-		TELEFONO = tELEFONO;
-	}
-
-	public String getESTADO() {
-		return ESTADO;
-	}
-
-	public void setESTADO(String eSTADO) {
-		ESTADO = eSTADO;
-	}
-
-	public Date getFECHA_REG() {
-		return FECHA_REG;
-	}
-
-	public void setFECHA_REG(Date fECHA_REG) {
-		FECHA_REG = fECHA_REG;
-	}
 
 	public String getAPELLIDO_MA() {
 		return APELLIDO_MA;
 	}
 
+
 	public void setAPELLIDO_MA(String aPELLIDO_MA) {
 		APELLIDO_MA = aPELLIDO_MA;
 	}
-	
-	
+
+
+	public String getDNI() {
+		return DNI;
+	}
+
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+
+
+	public String getSEXO() {
+		return SEXO;
+	}
+
+
+	public void setSEXO(String sEXO) {
+		SEXO = sEXO;
+	}
+
+
+	public Date getFECHA_NACIMIENTO() {
+		return FECHA_NACIMIENTO;
+	}
+
+
+	public void setFECHA_NACIMIENTO(Date fECHA_NACIMIENTO) {
+		FECHA_NACIMIENTO = fECHA_NACIMIENTO;
+	}
+
+
+	public Distrito getDistrito() {
+		return distrito;
+	}
+
+
+	public void setDistrito(Distrito distrito) {
+		this.distrito = distrito;
+	}
+
+
+	public String getDIRECCION() {
+		return DIRECCION;
+	}
+
+
+	public void setDIRECCION(String dIRECCION) {
+		DIRECCION = dIRECCION;
+	}
+
+
+	public String getTELEFONO() {
+		return TELEFONO;
+	}
+
+
+	public void setTELEFONO(String tELEFONO) {
+		TELEFONO = tELEFONO;
+	}
+
+
+	public String getESTADO() {
+		return ESTADO;
+	}
+
+
+	public void setESTADO(String eSTADO) {
+		ESTADO = eSTADO;
+	}
+
+
+	public Date getFECHA_REG() {
+		return FECHA_REG;
+	}
+
+
+	public void setFECHA_REG(Date fECHA_REG) {
+		FECHA_REG = fECHA_REG;
+	}
+
+
+	public Area getArea() {
+		return area;
+	}
+
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
 	
 	@Override
 	public int hashCode() {
@@ -185,13 +224,15 @@ public class Alumno implements Serializable {
 		result = prime * result + ((ESTADO == null) ? 0 : ESTADO.hashCode());
 		result = prime * result + ((FECHA_NACIMIENTO == null) ? 0 : FECHA_NACIMIENTO.hashCode());
 		result = prime * result + ((FECHA_REG == null) ? 0 : FECHA_REG.hashCode());
-		result = prime * result + ((ID_ALUMNO == null) ? 0 : ID_ALUMNO.hashCode());
-		result = prime * result + ((NOMBRE == null) ? 0 : NOMBRE.hashCode());
+		result = prime * result + ((ID_EMPLEADO == null) ? 0 : ID_EMPLEADO.hashCode());
+		result = prime * result + ((NOMBRES == null) ? 0 : NOMBRES.hashCode());
 		result = prime * result + ((SEXO == null) ? 0 : SEXO.hashCode());
 		result = prime * result + ((TELEFONO == null) ? 0 : TELEFONO.hashCode());
+		result = prime * result + ((area == null) ? 0 : area.hashCode());
 		result = prime * result + ((distrito == null) ? 0 : distrito.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -201,7 +242,7 @@ public class Alumno implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Alumno other = (Alumno) obj;
+		Empleado other = (Empleado) obj;
 		if (APELLIDO_MA == null) {
 			if (other.APELLIDO_MA != null)
 				return false;
@@ -237,15 +278,15 @@ public class Alumno implements Serializable {
 				return false;
 		} else if (!FECHA_REG.equals(other.FECHA_REG))
 			return false;
-		if (ID_ALUMNO == null) {
-			if (other.ID_ALUMNO != null)
+		if (ID_EMPLEADO == null) {
+			if (other.ID_EMPLEADO != null)
 				return false;
-		} else if (!ID_ALUMNO.equals(other.ID_ALUMNO))
+		} else if (!ID_EMPLEADO.equals(other.ID_EMPLEADO))
 			return false;
-		if (NOMBRE == null) {
-			if (other.NOMBRE != null)
+		if (NOMBRES == null) {
+			if (other.NOMBRES != null)
 				return false;
-		} else if (!NOMBRE.equals(other.NOMBRE))
+		} else if (!NOMBRES.equals(other.NOMBRES))
 			return false;
 		if (SEXO == null) {
 			if (other.SEXO != null)
@@ -257,6 +298,11 @@ public class Alumno implements Serializable {
 				return false;
 		} else if (!TELEFONO.equals(other.TELEFONO))
 			return false;
+		if (area == null) {
+			if (other.area != null)
+				return false;
+		} else if (!area.equals(other.area))
+			return false;
 		if (distrito == null) {
 			if (other.distrito != null)
 				return false;
@@ -264,7 +310,6 @@ public class Alumno implements Serializable {
 			return false;
 		return true;
 	}
-
 
 
 	private static final long serialVersionUID = 1L;
