@@ -29,12 +29,10 @@ public class Curso implements Serializable {
 
 	@Column(name = "NOMBRE_CURSO")
 	private String NOMBRE_CURSO;
+	
 	private static final long serialVersionUID = 1L;
 
-	@JoinTable(name = "especializacion_curso", joinColumns = {
-			@JoinColumn(name = "ID_CURSO", referencedColumnName = "ID_CURSO") }, inverseJoinColumns = {
-					@JoinColumn(name = "ID_ESPECIALIZACION", referencedColumnName = "ID_ESPECIALIZACION") })
-	@ManyToMany
+	@ManyToMany(mappedBy = "cursoList")
 	private List<Especializacion> especializacionList;
 
 	public Curso() {

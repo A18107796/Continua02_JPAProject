@@ -2,6 +2,7 @@ package idat.edu.pe.daa2.modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +14,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "area")
-public class Area implements Serializable{
-	
+public class Area implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -22,29 +23,25 @@ public class Area implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
 	@Column(name = "ID_AREA")
 	private Integer ID_AREA;
-	
+
 	@Column(name = "NOMBRE")
 	private String NOMBRE;
-	
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "area")
+	@OneToOne(mappedBy = "area", cascade = CascadeType.ALL)
 	private Empleado empleado;
-	
+
 	public Area() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
-	public Area(Integer iD_AREA, String nOMBRE, Empleado empleado) {
+	public Area(Integer iD_AREA, String nOMBRE) {
 		ID_AREA = iD_AREA;
 		NOMBRE = nOMBRE;
-		this.empleado = empleado;
-	}
-	
 
+	}
 
 	@Override
 	public int hashCode() {
@@ -55,8 +52,6 @@ public class Area implements Serializable{
 		result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -85,19 +80,13 @@ public class Area implements Serializable{
 		return true;
 	}
 
-
-
 	public Empleado getEmpleado() {
 		return empleado;
 	}
 
-
-
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
-
-
 
 	public Integer getID_AREA() {
 		return ID_AREA;
@@ -114,6 +103,5 @@ public class Area implements Serializable{
 	public void setNOMBRE(String nOMBRE) {
 		NOMBRE = nOMBRE;
 	}
-	
-	
+
 }

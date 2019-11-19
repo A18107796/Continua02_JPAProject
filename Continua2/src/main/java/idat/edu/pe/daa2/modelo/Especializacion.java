@@ -3,11 +3,14 @@ package idat.edu.pe.daa2.modelo;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -19,6 +22,7 @@ public class Especializacion implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ESPECIALIZACION")
+	@Basic(optional = false)
 	private Integer ID_ESPECIALIZACION;
 	
 	@Column(name = "COD_ESPECIALIZACION")
@@ -27,7 +31,11 @@ public class Especializacion implements Serializable{
 	@Column(name = "NOMBRE_ESPECIALIZACION")
 	private String NOMBRE_ESPECIALIZACION;
 	
-    @ManyToMany(mappedBy = "especializacionList")
+	
+	@JoinTable(name = "especializacion_curso", joinColumns = {
+			@JoinColumn(name = "ID_ESPECIALIZACION", referencedColumnName = "ID_ESPECIALIZACION") }, inverseJoinColumns = {
+					@JoinColumn(name = "ID_CURSO", referencedColumnName = "ID_CURSO") })
+	@ManyToMany
 	private List<Curso> cursoList;
 	
 	

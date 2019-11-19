@@ -3,6 +3,8 @@ package idat.edu.pe.daa2.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,20 +12,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "empleados")
 public class Empleado implements Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_EMPLEADO")
+	@Basic(optional = false)
 	private Integer ID_EMPLEADO;
-	
+
 	@Column(name = "NOMBRES")
 	private String NOMBRES;
-	
+
 	@Column(name = "APELLIDO_PA")
 	private String APELLIDO_PA;
 
@@ -36,13 +40,14 @@ public class Empleado implements Serializable {
 	@Column(name = "SEXO")
 	private String SEXO;
 
-	@Column(name = "FECHA_NACIMIENTO")
+	@Column(name = "FECHA_NAC")
 	private Date FECHA_NACIMIENTO;
 
-	@JoinColumn(name = "distrito",referencedColumnName = "ID_DISTRITO")
-	@OneToOne(optional = false)
-	private Distrito distrito;
 
+	@OneToOne
+	@JoinColumn(name = "ID_DISTRITO")
+    private Distrito distrito;
+	
 	@Column(name = "DIRECCION")
 	private String DIRECCION;
 
@@ -55,18 +60,16 @@ public class Empleado implements Serializable {
 	@Column(name = "FECHA_REG")
 	private Date FECHA_REG;
 
-	@JoinColumn(name = "area", referencedColumnName = "ID_AREA")
-	@OneToOne(optional = false)
-	private Area area;
-	
+	@OneToOne
+	@JoinColumn(name = "ID_AREA")
+    private Area area;
+
 	public Empleado() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	public Empleado(Integer iD_EMPLEADO, String nOMBRES, String aPELLIDO_PA, String aPELLIDO_MA, String dNI,
-			String sEXO, Date fECHA_NACIMIENTO, Distrito distrito, String dIRECCION, String tELEFONO, String eSTADO,
-			Date fECHA_REG, Area area) {
+			String sEXO, Date fECHA_NACIMIENTO, String dIRECCION, String tELEFONO, String eSTADO, Date fECHA_REG) {
 		ID_EMPLEADO = iD_EMPLEADO;
 		NOMBRES = nOMBRES;
 		APELLIDO_PA = aPELLIDO_PA;
@@ -74,145 +77,118 @@ public class Empleado implements Serializable {
 		DNI = dNI;
 		SEXO = sEXO;
 		FECHA_NACIMIENTO = fECHA_NACIMIENTO;
-		this.distrito = distrito;
+
 		DIRECCION = dIRECCION;
 		TELEFONO = tELEFONO;
 		ESTADO = eSTADO;
 		FECHA_REG = fECHA_REG;
-		this.area = area;
-	}
 
+	}
 
 	public Integer getID_EMPLEADO() {
 		return ID_EMPLEADO;
 	}
 
-
 	public void setID_EMPLEADO(Integer iD_EMPLEADO) {
 		ID_EMPLEADO = iD_EMPLEADO;
 	}
-
 
 	public String getNOMBRES() {
 		return NOMBRES;
 	}
 
-
 	public void setNOMBRES(String nOMBRES) {
 		NOMBRES = nOMBRES;
 	}
-
 
 	public String getAPELLIDO_PA() {
 		return APELLIDO_PA;
 	}
 
-
 	public void setAPELLIDO_PA(String aPELLIDO_PA) {
 		APELLIDO_PA = aPELLIDO_PA;
 	}
-
 
 	public String getAPELLIDO_MA() {
 		return APELLIDO_MA;
 	}
 
-
 	public void setAPELLIDO_MA(String aPELLIDO_MA) {
 		APELLIDO_MA = aPELLIDO_MA;
 	}
-
 
 	public String getDNI() {
 		return DNI;
 	}
 
-
 	public void setDNI(String dNI) {
 		DNI = dNI;
 	}
-
 
 	public String getSEXO() {
 		return SEXO;
 	}
 
-
 	public void setSEXO(String sEXO) {
 		SEXO = sEXO;
 	}
-
 
 	public Date getFECHA_NACIMIENTO() {
 		return FECHA_NACIMIENTO;
 	}
 
-
 	public void setFECHA_NACIMIENTO(Date fECHA_NACIMIENTO) {
 		FECHA_NACIMIENTO = fECHA_NACIMIENTO;
 	}
-
 
 	public Distrito getDistrito() {
 		return distrito;
 	}
 
-
 	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
 	}
-
 
 	public String getDIRECCION() {
 		return DIRECCION;
 	}
 
-
 	public void setDIRECCION(String dIRECCION) {
 		DIRECCION = dIRECCION;
 	}
-
 
 	public String getTELEFONO() {
 		return TELEFONO;
 	}
 
-
 	public void setTELEFONO(String tELEFONO) {
 		TELEFONO = tELEFONO;
 	}
-
 
 	public String getESTADO() {
 		return ESTADO;
 	}
 
-
 	public void setESTADO(String eSTADO) {
 		ESTADO = eSTADO;
 	}
-
 
 	public Date getFECHA_REG() {
 		return FECHA_REG;
 	}
 
-
 	public void setFECHA_REG(Date fECHA_REG) {
 		FECHA_REG = fECHA_REG;
 	}
-
 
 	public Area getArea() {
 		return area;
 	}
 
-
 	public void setArea(Area area) {
 		this.area = area;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -232,7 +208,6 @@ public class Empleado implements Serializable {
 		result = prime * result + ((distrito == null) ? 0 : distrito.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -310,7 +285,6 @@ public class Empleado implements Serializable {
 			return false;
 		return true;
 	}
-
 
 	private static final long serialVersionUID = 1L;
 
